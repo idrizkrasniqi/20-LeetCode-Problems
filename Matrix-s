@@ -1,0 +1,185 @@
+class Solution {
+#include <iostream>
+#include <vector>
+
+public:
+    std::vector<double> convertTemperature(double celsius) {
+    // Initialize the result vector to store Kelvin and Fahrenheit temperatures
+    std::vector<double> ans;
+
+    // Convert Celsius to Kelvin using the formula: K = C + 273.15
+    double kelvin = celsius + 273.15;
+
+    // Convert Celsius to Fahrenheit using the formula: F = (C * 9/5) + 32
+    double fahrenheit = (celsius * 9 / 5) + 32;
+
+    // Push the calculated Kelvin and Fahrenheit temperatures to the result vector
+    ans.push_back(kelvin);
+    ans.push_back(fahrenheit);
+
+    // Return the result vector
+    return ans;
+}
+
+int main() {
+    // Example usage
+    double celsius = 25.0;
+
+    // Convert Celsius to Kelvin and Fahrenheit
+    std::vector<double> result = convertTemperature(celsius);
+
+    // Print the result
+    std::cout << "Kelvin: " << result[0] << ", Fahrenheit: " << result[1] << std::endl;
+
+    // Return 0 to indicate successful completion
+    return 0;
+}
+    };
+class Solution {
+#include <iostream>
+#include <vector>
+
+public:
+    std::vector<double> convertTemperature(double celsius) {
+    // Initialize the result vector to store Kelvin and Fahrenheit temperatures
+    std::vector<double> ans;
+
+    // Convert Celsius to Kelvin using the formula: K = C + 273.15
+    double kelvin = celsius + 273.15;
+
+    // Convert Celsius to Fahrenheit using the formula: F = (C * 9/5) + 32
+    double fahrenheit = (celsius * 9 / 5) + 32;
+
+    // Push the calculated Kelvin and Fahrenheit temperatures to the result vector
+    ans.push_back(kelvin);
+    ans.push_back(fahrenheit);
+
+    // Return the result vector
+    return ans;
+}
+
+int main() {
+    // Example usage
+    double celsius = 25.0;
+
+    // Convert Celsius to Kelvin and Fahrenheit
+    std::vector<double> result = convertTemperature(celsius);
+
+    // Print the result
+    std::cout << "Kelvin: " << result[0] << ", Fahrenheit: " << result[1] << std::endl;
+
+    // Return 0 to indicate successful completion
+    return 0;
+}
+    };
+class Solution {
+public:
+    int sum(int num1, int num2) {
+    // Return the sum of the two integers
+    return num1 + num2;
+}
+
+int main() {
+    // Example usage
+    int num1 = 5;
+    int num2 = 7;
+
+    // Calculate the sum of the two integers
+    int result = sum(num1, num2);
+
+    // Print the result
+    std::cout << "Sum of " << num1 << " and " << num2 << " is: " << result << std::endl;
+
+    // Return 0 to indicate successful completion
+    return 0;
+}  
+};
+class Solution {
+#include <iostream>
+#include <vector>
+public:
+    int minimumSum(int num) {
+        // Convert num to a vector of digits
+    std::vector<int> digits;
+    while (num > 0) {
+        digits.push_back(num % 10);
+        num /= 10;
+    }
+
+    // Sort the digits using a custom sorting function
+    customSort(digits);
+
+    // Form two new numbers by alternating digits
+    int new1 = 0, new2 = 0;
+    for (int i = 0; i < digits.size(); ++i) {
+        if (i % 2 == 0) {
+            new1 = new1 * 10 + digits[i];
+        } else {
+            new2 = new2 * 10 + digits[i];
+        }
+    }
+
+    // Return the minimum sum of new1 and new2
+    return new1 + new2;
+}
+void customSort(std::vector<int>& digits) {
+    // Implement a simple sorting algorithm (e.g., bubble sort)
+    int n = digits.size();
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (digits[j] > digits[j + 1]) {
+                // Swap if the current element is greater than the next element
+                int temp = digits[j];
+                digits[j] = digits[j + 1];
+                digits[j + 1] = temp;
+            }
+        }
+    }
+}
+int main() {
+    // Example usage
+    int num = 2932;
+
+    // Calculate the minimum possible sum after splitting num
+    int result = minimumSum(num);
+
+    // Print the result
+    std::cout << "Minimum possible sum of new1 and new2: " << result << std::endl;
+
+    return 0;
+}
+};
+class Solution {
+public:
+    int numberOfMatches(int n) {
+        int matchesPlayed = 0;
+
+    while (n > 1) {
+        // Check if the number of teams is even or odd
+        if (n % 2 == 0) {
+            // If even, each team gets paired with another team
+            matchesPlayed += n / 2;
+            n /= 2;  // Number of teams advancing to the next round
+        } else {
+            // If odd, one team advances, and the rest get paired
+            matchesPlayed += (n - 1) / 2;
+            n = (n - 1) / 2 + 1;  // Number of teams advancing to the next round
+        }
+    }
+
+    return matchesPlayed;
+}
+
+int main() {
+    // Example usage
+    int n = 7;  // Replace with the actual number of teams
+
+    // Calculate the number of matches played until a winner is decided
+    int result = numberOfMatches(n);
+
+    // Print the result
+    std::cout << "Number of matches played: " << result << std::endl;
+
+    return 0;
+}
+};
