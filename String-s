@@ -1,0 +1,190 @@
+class Solution {
+    #include <iostream>
+#include <string>
+public:
+    std::string defangIPaddr(const std::string& address) {
+    std::string defangedAddress;
+
+    for (char c : address) {
+        if (c == '.') {
+            // Replace each period with "[.]"
+            defangedAddress += "[.]";
+        } else {
+            // Copy other characters unchanged
+            defangedAddress += c;
+        }
+    }
+
+    return defangedAddress;
+}
+
+int main() {
+    // Example usage
+    std::string ipAddress = "192.168.1.1";
+
+    // Get the defanged IP address
+    std::string defangedIP = defangIPaddr(ipAddress);
+
+    // Print the result
+    std::cout << "Defanged IP address: " << defangedIP << std::endl;
+
+    return 0;
+}
+};
+class Solution {
+#include <iostream>
+#include <vector>
+public:
+    int numJewelsInStones(const std::string jewels,const std::string stones) {
+    // Create a vector to store the types of jewels for quick lookup
+    std::vector<bool> isJewel(256, false);  // Assuming ASCII characters
+
+    // Mark the characters in jewels as true in the vector
+    for (char jewel : jewels) {
+        isJewel[static_cast<unsigned char>(jewel)] = true;
+    }
+
+    // Count the number of stones that are also jewels
+    int count = 0;
+    for (char stone : stones) {
+        if (isJewel[static_cast<unsigned char>(stone)]) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    // Example usage
+    std::string jewels = "aA";
+    std::string stones = "aAAbbbb";
+
+    int result = numJewelsInStones(jewels, stones);
+
+    std::cout << "Number of jewels in stones: " << result << std::endl;
+
+    return 0;
+}
+    };
+class Solution {
+public:
+    // Function to get indices of words containing the character x
+    std::vector<int> findWordsContaining(vector<string>& words, char x){
+    // Initialize an empty vector to store the indices of words containing character x
+    std::vector<int> result;
+
+    // Iterate through each word in the input vector
+    for (int i = 0; i < words.size(); ++i) {
+        // Check if the current word contains the character x
+        if (words[i].find(x) != std::string::npos) {
+            // If found, add the index to the result vector
+            result.push_back(i);
+        }
+    }
+
+    // Return the vector containing indices of words containing character x
+    return result;
+}
+
+int main() {
+    // Example usage
+    std::vector<std::string> words = {"apple", "banana", "cherry", "xylophone", "fox"};
+    char x = 'x';
+
+    // Get the indices of words containing the character x
+    std::vector<int> result = findWordsContaining(words, x);
+
+
+    std::cout << "Indices of words containing the character '" << x << "': ";
+    for (int index : result) {
+        std::cout << index << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+};
+class Solution {
+#include <iostream>
+#include <vector>
+#include <sstream>
+public:
+    // Function to check the maximum number of words in a single sentence
+int mostWordsFound(std::vector<std::string>& sentences) {
+    int maxWords = 0;
+
+    // Iterate through each sentence in the input vector
+    for (const std::string& sentence : sentences) {
+        // Use a stringstream to split the sentence into words
+        std::stringstream ss(sentence);
+        std::string word;
+        int wordCount = 0;
+
+        // Count the number of words in the current sentence
+        while (ss >> word) {
+            wordCount++;
+        }
+
+        // Update the maximum number of words if needed
+        maxWords = std::max(maxWords, wordCount);
+    }
+
+    // Return the maximum number of words found in any sentence
+    return maxWords;
+}
+
+int main() {
+    // Example usage
+    std::vector<std::string> sentences = {
+        "This is a sample sentence.",
+        "Another example of a longer sentence with more words.",
+        "Short."
+    };
+
+    // Get the maximum number of words in a single sentence
+    int result = mostWordsFound(sentences);
+
+    // Print the result
+    std::cout << "Maximum number of words in a single sentence: " << result << std::endl;
+
+    // Return 0 to indicate successful completion
+    return 0;
+}
+};
+class Solution {
+#include <iostream>
+#include <vector>
+#include <string>
+public:
+    // Function to check if two string arrays represent the same string
+    bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2){
+    // Concatenate elements of word1 into a single string
+    std::string str1;
+    for (const std::string& s : word1) {
+        str1 += s;
+    }
+
+    // Concatenate elements of word2 into a single string
+    std::string str2;
+    for (const std::string& s : word2) {
+        str2 += s;
+    }
+
+    // Check if the two strings are equal
+    return str1 == str2;
+}
+
+int main() {
+    // Example usage
+    std::vector<std::string> word1 = {"ab", "c"};
+    std::vector<std::string> word2 = {"a", "bc"};
+
+    // Check if the arrays represent the same string
+    bool result = arrayStringsAreEqual(word1, word2);
+
+    std::cout << (result ? "True" : "False") << std::endl;
+
+    return 0;
+}
+};
