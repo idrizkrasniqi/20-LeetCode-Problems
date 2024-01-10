@@ -1,0 +1,228 @@
+class Solution {
+public:
+    int maximumWealth(vector<vector<int>>& accounts) {
+        int maxWealth = 0;
+
+    // Iterate through each customer's accounts
+    for (const auto& customerAccounts : accounts) {
+        // Calculate the wealth for the current customer
+        int wealth = 0;
+        for (int amount : customerAccounts) {
+            wealth += amount;
+        }
+
+        // Update the maximum wealth if needed
+        maxWealth = std::max(maxWealth, wealth);
+    }
+
+    return maxWealth;
+}
+
+int main() {
+    // Example usage
+    std::vector<std::vector<int>> accounts = {
+        {1, 2, 3},
+        {3, 2, 1},
+        {4, 5, 6}
+    };
+
+    // Calculate the maximum wealth among all customers
+    int result = maximumWealth(accounts);
+
+    // Print the result
+    std::cout << "Maximum wealth among all customers: " << result << std::endl;
+
+    return 0;
+}
+};
+class Solution {
+public:
+    vector<vector<int>> largestLocal(vector<vector<int>>& grid) {
+        int n = grid.size();
+    // Initialize the maxLocal matrix with size (n - 2) x (n - 2)
+    std::vector<std::vector<int>> maxLocal(n - 2, std::vector<int>(n - 2, 0));
+
+    // Iterate through each 3x3 submatrix in the grid
+    for (int i = 1; i < n - 1; ++i) {
+        for (int j = 1; j < n - 1; ++j) {
+            // Find the maximum value in the 3x3 submatrix centered at (i, j)
+            int maxVal = grid[i - 1][j - 1];
+            for (int p = i - 1; p <= i + 1; ++p) {
+                for (int q = j - 1; q <= j + 1; ++q) {
+                    maxVal = std::max(maxVal, grid[p][q]);
+                }
+            }
+
+            // Assign the maximum value to maxLocal[i-1][j-1]
+            maxLocal[i - 1][j - 1] = maxVal;
+        }
+    }
+
+    // Return the generated maxLocal matrix
+    return maxLocal;
+}
+
+int main() {
+    // Example usage
+    std::vector<std::vector<int>> grid = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12},
+        {13, 14, 15, 16}
+    };
+
+    // Generate the maxLocal matrix
+    std::vector<std::vector<int>> result = largestLocal(grid);
+
+    // Print the result
+    std::cout << "Generated maxLocal matrix:" << std::endl;
+    for (const auto& row : result) {
+        for (int val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    return 0;
+}
+};
+class Solution {
+public:
+    int diagonalSum(vector<vector<int>>& mat) {
+        int n = mat.size();
+    int sum = 0;
+
+    // Loop through the primary diagonal (top-left to bottom-right)
+    for (int i = 0; i < n; ++i) {
+        sum += mat[i][i];
+    }
+
+    // Loop through the secondary diagonal (top-right to bottom-left)
+    for (int i = 0; i < n; ++i) {
+        sum += mat[i][n - 1 - i];
+    }
+
+    // Subtract the common elements between primary and secondary diagonals
+    if (n % 2 == 1) {
+        // If the matrix has an odd size, subtract the center element
+        sum -= mat[n / 2][n / 2];
+    }
+
+    return sum;
+}
+
+int main() {
+    // Example usage
+    std::vector<std::vector<int>> mat = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+    // Calculate the sum of matrix diagonals
+    int result = diagonalSum(mat);
+
+    // Print the result
+    std::cout << "Sum of matrix diagonals: " << result << std::endl;
+
+    return 0;
+}
+};
+class Solution {
+public:
+    vector<int> flipAndInvertRow(const vector<int>& row) {
+    int n = row.size();
+    std::vector<int> result(n);
+
+    // Flip the row horizontally
+    for (int i = 0; i < n; ++i) {
+        result[i] = row[n - 1 - i];
+    }
+
+    // Invert each element
+    for (int i = 0; i < n; ++i) {
+        result[i] = 1 - result[i];
+    }
+
+    return result;
+}
+
+// Function to flip and invert a binary image
+std::vector<std::vector<int>> flipAndInvertImage(const std::vector<std::vector<int>>& image) {
+    int n = image.size();
+    std::vector<std::vector<int>> result(n, std::vector<int>(n));
+
+    // Apply the flipAndInvertRow function to each row of the image
+    for (int i = 0; i < n; ++i) {
+        result[i] = flipAndInvertRow(image[i]);
+    }
+
+    return result;
+}
+
+int main() {
+    // Example usage
+    std::vector<std::vector<int>> image = {
+        {1, 1, 0},
+        {1, 0, 1},
+        {0, 0, 0}
+    };
+
+    // Flip and invert the binary image
+    std::vector<std::vector<int>> result = flipAndInvertImage(image);
+
+    // Print the result
+    std::cout << "Flipped and inverted image:" << std::endl;
+    for (const auto& row : result) {
+        for (int value : row) {
+            std::cout << value << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    return 0;
+}
+};
+class Solution {
+public:
+    int countNegatives(vector<vector<int>>& grid) {
+        // Function to count negative numbers in the grid
+    int m = grid.size();
+    int n = grid[0].size();
+
+    int count = 0;
+    int row = 0;
+    int col = n - 1;
+
+    while (row < m && col >= 0) {
+        if (grid[row][col] < 0) {
+            // If the current element is negative, all elements to the left are also negative
+            count += (m - row);
+            col--;
+        } else {
+            // If the current element is non-negative, move to the next row
+            row++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    // Example usage
+    std::vector<std::vector<int>> grid = {
+        {-3, -2, -1, 1},
+        {-2, -1,  1, 2},
+        {-1,  1,  2, 3},
+        { 1,  2,  3, 4}
+    };
+
+    // Count the number of negative numbers in the grid
+    int result = countNegatives(grid);
+
+    // Print the result
+    std::cout << "Number of negative numbers: " << result << std::endl;
+
+    return 0;
+}
+};
